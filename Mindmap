@@ -1,0 +1,43 @@
+   [Power Bill Management Program]
+
+              | Main Function |
+              |---------------|
+                  |
+       +------[ Display Menu ]-------+
+       |                              |
+   [1. Add a new bill]         [2. View all bills]
+       |                              |
+       |   +------[ Add Bill ]------+   +------[ View Bills ]-------+
+       |   |                      |   |                           |
+       |   |  - Check Capacity   |   |   - Check Empty           |
+       |   |  - Input Consumption|   |   - Display All Bills     |
+       |   |  - Input Amount     |   |   - Loop through Records  |
+       |   |  - Increment Count  |   |                           |
+       |   |  - Success Message |   |                           |
+       |   |                      |   |                           |
+       |   +----------------------+   +---------------------------+
+       |                              |
+[3. Update a bill]             [4. Delete a bill]
+       |                              |
+       |   +------[ Update Bill ]---+   +------[ Delete Bill ]-------+
+       |   |                      |   |                           |
+       |   |  - Check Empty       |   |   - Check Empty           |
+       |   |  - Input Index       |   |   - Input Index           |
+       |   |  - Validate Index    |   |   - Validate Index        |
+       |   |  - Input Consumption|   |   |   - Shift Records        |
+       |   |  - Input Amount     |   |   |   - Decrement Count     |
+       |   |  - Success Message |   |   |   - Success Message     |
+       |   |                      |   |                           |
+       |   +----------------------+   +---------------------------+
+       |
+[5. Exit]
+
+   [PowerBill Struct]
+   - consumption
+   - amount
+
+   [Function Prototypes]
+   - addBill
+   - viewBills
+   - updateBill
+   - deleteBill
