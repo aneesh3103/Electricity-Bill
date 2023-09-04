@@ -1,0 +1,136 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+// Define the maximum number of bills the system can handle
+#define MAX_BILLS 100
+
+// Structure to represent a power bill
+struct PowerBill {
+float consumption;
+float amount;
+};
+
+// Function prototypes
+int addBill(struct PowerBill bills[], int count);
+void viewBills(struct PowerBill bills[], int count);
+void updateBill(struct PowerBill bills[], int count);
+void deleteBill(struct PowerBill bills[], int *count);
+
+int main() {
+struct PowerBill bills[MAX_BILLS];
+int billCount = 0;
+int choice;
+
+do {
+// Display the menu
+printf("\n------ Power Bill Management System ------\n");
+printf("1. Add a new bill\n");
+printf("2. View all bills\n");
+printf("3. Update a bill\n");
+printf("4. Delete a bill\n");
+printf("5. Exit\n");
+printf("Enter your choice: ");
+scanf("%d", &choice);
+
+switch (choice) {
+case 1:
+billCount = addBill(bills, billCount);
+break;
+case 2:
+viewBills(bills, billCount);
+break;
+case 3:
+updateBill(bills, billCount);
+break;
+case 4:
+deleteBill(bills, &billCount);
+break;
+case 5:
+printf("Exiting the program. Goodbye!\n");
+break;
+default:
+printf("Invalid choice. Please try again.\n");
+}
+} while (choice != 5);
+
+return 0;
+}
+
+int addBill(struct PowerBill bills[], int count) {
+if (count >= MAX_BILLS) {
+printf("Cannot add more bills. The system is full.\n");
+return count;
+}
+
+printf("Enter the consumption (in kWh) for the new bill: ");
+scanf("%f", &bills[count].consumption);
+
+printf("Enter the amount for the new bill: ");
+scanf("%f", &bills[count].amount);
+
+printf("Bill added successfully!\n");
+
+return count + 1;
+}
+
+void viewBills(struct PowerBill bills[], int count) {
+if (count == 0) {
+printf("No bills found.\n");
+return;
+}
+
+printf("\n--- All Bills ---\n");
+printf("Consumption (kWh) | Amount ($)\n");
+printf("--------------------------------\n");
+
+for (int i = 0; i < count; i++) {
+printf("%10.2f | %10.2f\n", bills[i].consumption, bills[i].amount);
+}
+}
+
+void updateBill(struct PowerBill bills[], int count) {
+if (count == 0) {
+printf("No bills found. Nothing to update.\n");
+return;
+}
+
+int billIndex;
+printf("Enter the index of the bill to update (0 to %d): ", count - 1);
+scanf("%d", &billIndex);
+
+if (billIndex < 0 || billIndex >= count) {
+printf("Invalid index. Please try again.\n");
+return;
+}
+
+printf("Enter the new consumption (in kWh) for the bill: ");
+scanf("%f", &bills[billIndex].consumption);
+
+printf("Enter the new amount for the bill: ");
+scanf("%f", &bills[billIndex].amount);
+
+printf("Bill updated successfully!\n");
+}
+
+void deleteBill(struct PowerBill bills[], int *count) {
+if (*count == 0) {
+printf("No bills found. Nothing to delete.\n");
+return;
+}
+
+int billIndex;
+printf("Enter the index of the bill to delete (0 to %d): ", *count - 1);
+scanf("%d", &billIndex);
+
+if (billIndex < 0 || billIndex >= *count) {
+printf("Invalid index. Please try again.\n");
+return;
+}
+
+for (int i = billIndex; i < *count - 1; i++) {
+bills[i] = bills[i + 1];
+}
+
+(*count)--;
+printf("Bill deleted successfully!\n");
+}
